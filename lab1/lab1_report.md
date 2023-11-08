@@ -26,7 +26,7 @@ Date of finished: 08.11.2023
 
 1. Создаем виртуальную машину и подключаемся к ней
 
-![Alt text](image.png)
+<img width="909" alt="image_2023-11-08_17-55-13" src="https://github.com/NadiaSob/2023_2024-network_programming-k34212-sobolevskaya_n_s/assets/43678322/f9126bc7-ab6f-4b83-8921-ca4722fd0c09">
 
 ```
 PS C:\Users\sobo_> ssh admin@84.201.161.145
@@ -39,7 +39,7 @@ ls -la /usr/bin/python3.6
 sudo pip3 install ansible
 ansible --version
 ```
-![Alt text](image-1.png)
+<img width="634" alt="image_2023-11-08_18-10-21" src="https://github.com/NadiaSob/2023_2024-network_programming-k34212-sobolevskaya_n_s/assets/43678322/28a63b06-c460-4787-9077-a8110848f0c8">
 
 3. Настроим VPN сервер
 
@@ -92,29 +92,29 @@ user1	pptpd	password1	"*"
 Образ для CHR был взят с сайта mikrotik.com. Была установлена версия 6.49.10 Long-term.
 Загруженный файл открываем в VirtualBox и запускаем машину.
 
-![Alt text](image_2023-11-08_18-15-41.png)
+<img width="626" alt="image_2023-11-08_18-15-41" src="https://github.com/NadiaSob/2023_2024-network_programming-k34212-sobolevskaya_n_s/assets/43678322/08fcc4de-414f-4869-9ca2-6fdec3b975ba">
 
 Выводим ip адрес и подключаемся к роутеру через Winbox
 
-![Alt text](image-2.png)
+<img width="226" alt="image_2023-11-08_18-20-28" src="https://github.com/NadiaSob/2023_2024-network_programming-k34212-sobolevskaya_n_s/assets/43678322/0797a68e-a1e0-4a91-9d32-5e0c56d708ef">
 
 В Winbox подключаемся к адресу 192.168.0.106 и создаем подключение к виртуальной машине с адресом 84.201.161.145
 
-![Alt text](image-3.png)
+![image](https://github.com/NadiaSob/2023_2024-network_programming-k34212-sobolevskaya_n_s/assets/43678322/ecf855d4-3e06-4b4a-8899-edea9f63d89b)
 
 5. Проверка сетевой связанности
 
 Сделаем пинг на роутер
 
-![Alt text](image-5.png)
+<img width="423" alt="image_2023-11-08_19-00-51" src="https://github.com/NadiaSob/2023_2024-network_programming-k34212-sobolevskaya_n_s/assets/43678322/30bab935-ae42-4e89-8c2a-aeaad4fbdf40">
 
 Сделаем пинг с роутера на виртуалку
 
-![Alt text](image_2023-11-08_18-41-48.png)
+<img width="338" alt="image_2023-11-08_18-41-48" src="https://github.com/NadiaSob/2023_2024-network_programming-k34212-sobolevskaya_n_s/assets/43678322/a9bacd55-1ea8-4d60-bfe8-6fe57f3c985d">
 
-В рехультате получается схема связи следующего вида:
+В результате получается схема связи следующего вида:
 
-![Alt text](image-6.png)
+<img width="219" alt="image" src="https://github.com/NadiaSob/2023_2024-network_programming-k34212-sobolevskaya_n_s/assets/43678322/7d04b979-5567-455a-9fbe-0d68e95b6acf">
 
 6. Вывод
 
