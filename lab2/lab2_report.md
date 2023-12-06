@@ -176,11 +176,11 @@ nadia@net-prog:~$ ansible-playbook -i inventory play.yml >> res.txt
 ![image](./images/02.drawio.png)
 
 
-Произведем пинг chr2 с chr1:
+Произведем пинг chr1 с chr2:
 
 ![image](./images/lab02_2.png)
 
-Произведем пинг chr1 с chr2:
+Произведем пинг chr2 с chr1:
 
 ![image](./images/lab02_3.png)
 
