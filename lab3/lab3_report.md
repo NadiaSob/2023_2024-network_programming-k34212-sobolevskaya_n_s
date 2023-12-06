@@ -132,7 +132,7 @@ python3 manage.py runserver 0.0.0.0:8000 --insecure
 ansible-galaxy collection install netbox.netbox
 ```
 
-Создадим файл netbox_cinf_galaxy.yml:
+Создадим файл netbox_inventory.yml:
 
 ```console
 plugin: netbox.netbox.nb_inventory
