@@ -172,7 +172,7 @@ nadia@net-prog:~$ ansible-playbook -i inventory play.yml >> res.txt
 #### 8. Проверим связанность роутеров
 
 Схему связи можно увидеть ниже:
-<img width="550" alt="image" src="./images/02.drawio.png">
+![image](./images/02.drawio.png)
 
 
 Произведем пинг chr2 с chr1:
