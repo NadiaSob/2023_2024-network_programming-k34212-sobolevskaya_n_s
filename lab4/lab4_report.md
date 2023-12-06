@@ -24,6 +24,8 @@ Date of finished: 06.12.2023
 
 ## Ход работы
 
+Склонируем репозиторий p4lang/tutorials:
+
 ```console
 sudo git clone https://github.com/p4lang/tutorials
 ```
