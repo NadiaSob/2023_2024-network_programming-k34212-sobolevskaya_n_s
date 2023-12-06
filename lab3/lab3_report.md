@@ -206,7 +206,7 @@ ansible-playbook -i inventory serial_number-playbook.yml
 
 ![image](./images/lab03_6.png)
 
-Схема связи можно увидеть ниже:
+Схему связи можно увидеть ниже:
 
 ![image](./images/lab03_7.png)
 
