@@ -172,6 +172,7 @@ nadia@net-prog:~$ ansible-playbook -i inventory play.yml >> res.txt
 #### 8. Проверим связанность роутеров
 
 Схему связи можно увидеть ниже:
+
 ![image](./images/02.drawio.png)
 
 
