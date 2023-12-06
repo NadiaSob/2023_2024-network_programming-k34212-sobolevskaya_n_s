@@ -1,0 +1,38 @@
+- name: Configure
+  hosts: routers
+  gather_facts: false
+  tasks:
+    - name: add user
+      routeros_command:
+        commands :
+          - /user add name=valery password=remote group=full
+    - name: set NTP client
+      routeros_command:
+        commands :
+          - /system ntp client set enabled yes primary-ntp [:resolve @.ru.pool.ntp.org] secondary-ntp [:resolve 1.ru.pool.ntp.org]
+    - name: set OSPF
+      routeros_command:
+        commands :
+          - /ip address add address={{rid}}/24 interface=ether1
+          - /routing ospf network add network=10.10.1.0/24 area=backbone
+
+- name: Get information
+  hosts: routers
+  gather_facts: false
+  tasks:
+    - name: get configs
+      register: configuration
+      community.routeros.facts:
+        gather_subset:
+          - config
+    - name: collect OSPF topology
+      register: ospf
+      routeros_command:
+        commands :
+          - /routing ospf neighbor print
+    - name: Print configuration
+      debug:
+        msg: "{{ configuration }}"
+    - name: Print ospf
+      debug:
+        msg: "{{ ospf }}"

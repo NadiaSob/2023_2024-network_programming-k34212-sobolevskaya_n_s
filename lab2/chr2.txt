@@ -1,0 +1,285 @@
+# nov/06/2023 14:25:18 by RouterOS 6.49.10
+# software id = 
+#
+#
+#
+/interface ethernet
+set [ find default-name=ether1 ] advertise=\
+    10M-half,10M-full,100M-half,100M-full,1000M-full arp=enabled arp-timeout=\
+    auto auto-negotiation=yes cable-settings=default disable-running-check=\
+    yes disabled=no full-duplex=yes loop-protect=default \
+    loop-protect-disable-time=5m loop-protect-send-interval=5s mac-address=\
+    08:00:27:27:F2:67 mtu=1500 name=ether1 orig-mac-address=08:00:27:27:F2:67 \
+    rx-flow-control=off speed=1Gbps tx-flow-control=off
+/interface list
+set [ find name=all ] comment="contains all interfaces" exclude="" include="" \
+    name=all
+set [ find name=none ] comment="contains no interfaces" exclude="" include="" \
+    name=none
+set [ find name=dynamic ] comment="contains dynamic interfaces" exclude="" \
+    include="" name=dynamic
+set [ find name=static ] comment="contains static interfaces" exclude="" \
+    include="" name=static
+/interface lte apn
+set [ find default=yes ] add-default-route=yes apn=internet \
+    default-route-distance=2 name=default use-peer-dns=yes
+/interface wireless security-profiles
+set [ find default=yes ] authentication-types="" disable-pmkid=no \
+    eap-methods=passthrough group-ciphers=aes-ccm group-key-update=5m \
+    interim-update=0s management-protection=disabled \
+    management-protection-key="" mode=none mschapv2-password="" \
+    mschapv2-username="" name=default radius-called-format=mac:ssid \
+    radius-eap-accounting=no radius-mac-accounting=no \
+    radius-mac-authentication=no radius-mac-caching=disabled \
+    radius-mac-format=XX:XX:XX:XX:XX:XX radius-mac-mode=as-username \
+    static-algo-0=none static-algo-1=none static-algo-2=none static-algo-3=\
+    none static-key-0="" static-key-1="" static-key-2="" static-key-3="" \
+    static-sta-private-algo=none static-sta-private-key="" \
+    static-transmit-key=key-0 supplicant-identity=MikroTik tls-certificate=\
+    none tls-mode=no-certificates unicast-ciphers=aes-ccm wpa-pre-shared-key=\
+    "" wpa2-pre-shared-key=""
+/ip dhcp-client option
+set clientid_duid code=61 name=clientid_duid value="0xff\$(CLIENT_DUID)"
+set clientid code=61 name=clientid value="0x01\$(CLIENT_MAC)"
+set hostname code=12 name=hostname value="\$(HOSTNAME)"
+/ip hotspot profile
+set [ find default=yes ] dns-name="" hotspot-address=0.0.0.0 html-directory=\
+    hotspot html-directory-override="" http-cookie-lifetime=3d http-proxy=\
+    0.0.0.0:0 login-by=cookie,http-chap name=default rate-limit="" \
+    smtp-server=0.0.0.0 split-user-domain=no use-radius=no
+/ip hotspot user profile
+set [ find default=yes ] add-mac-cookie=yes address-list="" idle-timeout=none \
+    !insert-queue-before keepalive-timeout=2m mac-cookie-timeout=3d name=\
+    default !parent-queue !queue-type shared-users=1 status-autorefresh=1m \
+    transparent-proxy=no
+/ip ipsec mode-config
+set [ find default=yes ] name=request-only responder=no use-responder-dns=\
+    exclusively
+/ip ipsec policy group
+set [ find default=yes ] name=default
+/ip ipsec profile
+set [ find default=yes ] dh-group=modp2048,modp1024 dpd-interval=2m \
+    dpd-maximum-failures=5 enc-algorithm=aes-128,3des hash-algorithm=sha1 \
+    lifetime=1d name=default nat-traversal=yes proposal-check=obey
+/ip ipsec proposal
+set [ find default=yes ] auth-algorithms=sha1 disabled=no enc-algorithms=\
+    aes-256-cbc,aes-192-cbc,aes-128-cbc lifetime=30m name=default pfs-group=\
+    modp1024
+/ppp profile
+set *0 address-list="" !bridge !bridge-horizon bridge-learning=default \
+    !bridge-path-cost !bridge-port-priority change-tcp-mss=yes !dns-server \
+    !idle-timeout !incoming-filter !insert-queue-before !interface-list \
+    !local-address name=default on-down="" on-up="" only-one=default \
+    !outgoing-filter !parent-queue !queue-type !rate-limit !remote-address \
+    !session-timeout use-compression=default use-encryption=default use-mpls=\
+    default use-upnp=default !wins-server
+set *FFFFFFFE address-list="" !bridge !bridge-horizon bridge-learning=default \
+    !bridge-path-cost !bridge-port-priority change-tcp-mss=yes !dns-server \
+    !idle-timeout !incoming-filter !insert-queue-before !interface-list \
+    !local-address name=default-encryption on-down="" on-up="" only-one=\
+    default !outgoing-filter !parent-queue !queue-type !rate-limit \
+    !remote-address !session-timeout use-compression=default use-encryption=\
+    yes use-mpls=default use-upnp=default !wins-server
+/interface ovpn-client
+add add-default-route=no auth=sha1 certificate=chr2.crt_0 cipher=aes256 \
+    connect-to=51.250.47.204 disabled=no mac-address=02:66:F6:83:E0:77 \
+    max-mtu=1500 mode=ip name=ovpn-out1 password="" port=993 profile=default \
+    use-peer-dns=yes user=admin verify-server-certificate=no
+/queue type
+set 0 kind=pfifo name=default pfifo-limit=50
+set 1 kind=pfifo name=ethernet-default pfifo-limit=50
+set 2 kind=sfq name=wireless-default sfq-allot=1514 sfq-perturb=5
+set 3 kind=red name=synchro=0.0.0.0/0
+/ip cloud
+set ddns-enabled=no ddns-update-interval=none update-time=no
+/ip cloud advanced
+set use-local-address=no
+/ip dhcp-client
+add add-default-route=yes default-route-distance=1 dhcp-options=\
+    hostname,clientid disabled=no interface=ether1 use-peer-dns=yes \
+    use-peer-ntp=yes
+/ip dhcp-server config
+set accounting=yes interim-update=0s store-leases-disk=5m
+/ip dns
+set allow-remote-requests=no cache-max-ttl=1w cache-size=2048KiB \
+    max-concurrent-queries=100 max-concurrent-tcp-sessions=20 \
+    max-udp-packet-size=4096 query-server-timeout=2s query-total-timeout=10s \
+    servers="" use-doh-server="" verify-doh-cert=no
+/ip firewall service-port
+set ftp disabled=no ports=21
+set tftp disabled=no ports=69
+set irc disabled=no ports=6667
+set h323 disabled=no
+set sip disabled=no ports=5060,5061 sip-direct-media=yes sip-timeout=1h
+set pptp disabled=no
+set udplite disabled=no
+set dccp disabled=no
+set sctp disabled=no
+/ip hotspot service-port
+set ftp disabled=no ports=21
+/ip hotspot user
+set [ find default=yes ] comment="counters and limits for trial users" \
+    disabled=no name=default-trial
+/ip ipsec policy
+set 0 disabled=no dst-address=::/0 group=default proposal=default protocol=\
+    all src-address=::/0 template=yes
+/ip ipsec settings
+set accounting=yes interim-update=0s xauth-use-radius=no
+/ip proxy
+set always-from-cache=no anonymous=no cache-administrator=webmaster \
+    cache-hit-dscp=4 cache-on-disk=no cache-path=web-proxy enabled=no \
+    max-cache-object-size=2048KiB max-cache-size=unlimited \
+    max-client-connections=600 max-fresh-time=3d max-server-connections=600 \
+    parent-proxy=:: parent-proxy-port=0 port=8080 serialize-connections=no \
+    src-address=::
+/ip service
+set telnet address="" disabled=no port=23
+set ftp address="" disabled=no port=21
+set www address="" disabled=no port=80
+set ssh address="" disabled=no port=22
+set www-ssl address="" certificate=none disabled=yes port=443 tls-version=any
+set api address="" disabled=no port=8728
+set winbox address="" disabled=no port=8291
+set api-ssl address="" certificate=none disabled=no port=8729 tls-version=any
+/ip smb
+set allow-guests=yes comment=MikrotikSMB domain=MSHOME enabled=no interfaces=\
+    all
+/ip smb shares
+set [ find default=yes ] comment="default share" directory=/pub disabled=no \
+    max-sessions=10 name=pub
+/ip smb users
+set [ find default=yes ] disabled=no name=guest password="" read-only=yes
+/ip socks
+set auth-method=none connection-idle-timeout=2m enabled=no max-connections=\
+    200 port=1080 version=4
+/ip ssh
+set allow-none-crypto=no always-allow-password-login=no forwarding-enabled=no \
+    host-key-size=2048 strong-crypto=no
+/ip tftp settings
+set max-block-size=4096
+/ip traffic-flow
+set active-flow-timeout=30m cache-entries=32k enabled=no \
+    inactive-flow-timeout=15s interfaces=all packet-sampling=no \
+    sampling-interval=0 sampling-space=0
+/ip traffic-flow ipfix
+set bytes=yes dst-address=yes dst-address-mask=yes dst-mac-address=yes \
+    dst-port=yes first-forwarded=yes gateway=yes icmp-code=yes icmp-type=yes \
+    igmp-type=yes in-interface=yes ip-header-length=yes ip-total-length=yes \
+    ipv6-flow-label=yes is-multicast=yes last-forwarded=yes nat-dst-address=\
+    yes nat-dst-port=yes nat-events=no nat-src-address=yes nat-src-port=yes \
+    out-interface=yes packets=yes protocol=yes src-address=yes \
+    src-address-mask=yes src-mac-address=yes src-port=yes sys-init-time=yes \
+    tcp-ack-num=yes tcp-flags=yes tcp-seq-num=yes tcp-window-size=yes tos=yes \
+    ttl=yes udp-length=yes
+/ip upnp
+set allow-disable-external-interface=no enabled=no show-dummy-rule=yes
+/mpls
+set allow-fast-path=yes dynamic-label-range=16-1048575 propagate-ttl=yes
+/mpls interface
+set [ find default=yes ] disabled=no interface=all mpls-mtu=1508
+/mpls ldp
+set distribute-for-default-route=no enabled=no hop-limit=255 loop-detect=no \
+    lsr-id=0.0.0.0 path-vector-limit=255 transport-address=0.0.0.0 \
+    use-explicit-null=no
+/port firmware
+set directory=firmware ignore-directip-modem=no
+/ppp aaa
+set accounting=yes interim-update=0s use-circuit-id-in-nas-port-id=no \
+    use-radius=no
+/radius incoming
+set accept=no port=3799
+/routing bfd interface
+set [ find default=yes ] disabled=no interface=all interval=0.2s min-rx=0.2s \
+    multiplier=5
+/routing mme
+set bidirectional-timeout=2 gateway-class=none gateway-keepalive=1m \
+    gateway-selection=no-gateway origination-interval=5s preferred-gateway=\
+    0.0.0.0 timeout=1m ttl=50
+/routing rip
+set distribute-default=never garbage-timer=2m metric-bgp=1 metric-connected=1 \
+    metric-default=1 metric-ospf=1 metric-static=1 redistribute-bgp=no \
+    redistribute-connected=no redistribute-ospf=no redistribute-static=no \
+    routing-table=main timeout-timer=3m update-timer=30s
+/snmp
+set contact="" enabled=no engine-id="" location="" trap-community=public \
+    trap-generators=temp-exception trap-target="" trap-version=1
+/system clock
+set time-zone-autodetect=yes time-zone-name=manual
+/system clock manual
+set dst-delta=+00:00 dst-end="jan/01/1970 00:00:00" dst-start=\
+    "jan/01/1970 00:00:00" time-zone=+00:00
+/system console
+set [ find vcno=1 ] channel=0 disabled=no term=linux
+set [ find vcno=2 ] channel=0 disabled=no term=linux
+set [ find vcno=3 ] channel=0 disabled=no term=linux
+set [ find vcno=4 ] channel=0 disabled=no term=linux
+set [ find vcno=5 ] channel=0 disabled=no term=linux
+set [ find vcno=6 ] channel=0 disabled=no term=linux
+set [ find vcno=7 ] channel=0 disabled=no term=linux
+set [ find vcno=8 ] channel=0 disabled=no term=linux
+/system console screen
+set blank-interval=10min line-count=25
+/system hardware
+set multi-cpu=yes
+/system health
+set state-after-reboot=enabled
+/system identity
+set name=MikroTik
+/system leds settings
+set all-leds-off=never
+/system logging
+set 0 action=memory disabled=no prefix="" topics=info
+set 1 action=memory disabled=no prefix="" topics=error
+set 2 action=memory disabled=no prefix="" topics=warning
+set 3 action=echo disabled=no prefix="" topics=critical
+/system note
+set note="" show-at-login=yes
+/system ntp client
+set enabled=no primary-ntp=0.0.0.0 secondary-ntp=0.0.0.0 server-dns-names=""
+/system resource irq
+set 0 cpu=auto
+set 1 cpu=auto
+set 2 cpu=auto
+set 3 cpu=auto
+set 4 cpu=auto
+set 5 cpu=auto
+/system upgrade mirror
+set check-interval=1d enabled=no primary-server=0.0.0.0 secondary-server=\
+    0.0.0.0 user=""
+/system watchdog
+set auto-send-supout=no automatic-supout=yes ping-start-after-boot=5m \
+    ping-timeout=1m watch-address=none watchdog-timer=yes
+/tool bandwidth-server
+set allocate-udp-ports-from=2000 authenticate=yes enabled=yes max-sessions=\
+    100
+/tool e-mail
+set address=0.0.0.0 from=<> password="" port=25 start-tls=no user=""
+/tool graphing
+set page-refresh=300 store-every=5min
+/tool mac-server
+set allowed-interface-list=all
+/tool mac-server mac-winbox
+set allowed-interface-list=all
+/tool mac-server ping
+set enabled=yes
+/tool romon
+set enabled=no id=00:00:00:00:00:00 secrets=""
+/tool romon port
+set [ find default=yes ] cost=100 disabled=no forbid=no interface=all \
+    secrets=""
+/tool sms
+set allowed-number="" auto-erase=no channel=0 port=none receive-enabled=no \
+    secret="" sim-pin=""
+/tool sniffer
+set file-limit=1000KiB file-name="" filter-cpu="" filter-direction=any \
+    filter-interface="" filter-ip-address="" filter-ip-protocol="" \
+    filter-ipv6-address="" filter-mac-address="" filter-mac-protocol="" \
+    filter-operator-between-entries=or filter-port="" filter-size="" \
+    filter-stream=no memory-limit=100KiB memory-scroll=yes only-headers=no \
+    streaming-enabled=no streaming-server=0.0.0.0:37008
+/tool traffic-generator
+set latency-distribution-max=100us measure-out-of-order=yes \
+    stats-samples-to-keep=100 test-id=0
+/user aaa
+set accounting=yes default-group=read exclude-groups="" interim-update=0s \
+    use-radius=no
