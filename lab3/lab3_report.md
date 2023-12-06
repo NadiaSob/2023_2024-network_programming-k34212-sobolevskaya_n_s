@@ -200,8 +200,6 @@ ansible-playbook -i inventory serial_number-playbook.yml
 ```
 Получаем результат, видим измененные серийные номера:
 
-![image](./images/lab03_4.png)
-
 ![image](./images/lab03_5.png)
 
 ![image](./images/lab03_6.png)
